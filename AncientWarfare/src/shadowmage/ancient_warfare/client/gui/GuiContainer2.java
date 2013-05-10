@@ -82,36 +82,39 @@ protected int guiLeft;
 protected int guiTop;
 
 
+protected int mouseX;
+protected int mouseY;
+
 private Slot theSlot;
 
-///** Used when touchscreen is enabled */
-//private Slot clickedSlot = null;
-//
-///** Used when touchscreen is enabled */
-//private boolean isRightMouseClick = false;
-//
-///** Used when touchscreen is enabled */
-//private ItemStack draggedStack = null;
-//private int field_85049_r = 0;
-//private int field_85048_s = 0;
-//private Slot returningStackDestSlot = null;
-//private long returningStackTime = 0L;
-//
-///** Used when touchscreen is enabled */
-//private ItemStack returningStack = null;
-//private Slot field_92033_y = null;
-//private long field_92032_z = 0L;
-//protected final Set field_94077_p = new HashSet();
-//protected boolean field_94076_q;
-//private int field_94071_C = 0;
-//private int field_94067_D = 0;
-//private boolean field_94068_E = false;
-//private int field_94069_F;
-//private long field_94070_G = 0L;
-//private Slot field_94072_H = null;
-//private int field_94073_I = 0;
-//private boolean field_94074_J;
-//private ItemStack field_94075_K = null;
+/** Used when touchscreen is enabled */
+private Slot clickedSlot = null;
+
+/** Used when touchscreen is enabled */
+private boolean isRightMouseClick = false;
+
+/** Used when touchscreen is enabled */
+private ItemStack draggedStack = null;
+private int field_85049_r = 0;
+private int field_85048_s = 0;
+private Slot returningStackDestSlot = null;
+private long returningStackTime = 0L;
+
+/** Used when touchscreen is enabled */
+private ItemStack returningStack = null;
+private Slot field_92033_y = null;
+private long field_92032_z = 0L;
+protected final Set field_94077_p = new HashSet();
+protected boolean field_94076_q;
+private int field_94071_C = 0;
+private int field_94067_D = 0;
+private boolean field_94068_E = false;
+private int field_94069_F;
+private long field_94070_G = 0L;
+private Slot field_94072_H = null;
+private int field_94073_I = 0;
+private boolean field_94074_J;
+private ItemStack field_94075_K = null;
 
 public GuiContainer2(Container par1Container)
   {
@@ -161,17 +164,7 @@ public void drawScreen(int par1, int par2, float par3)
     Slot slot = (Slot)this.inventorySlots.inventorySlots.get(j1);
     this.drawSlotInventory(slot);
 
-    if (this.isMouseOverSlot(slot, par1, par2))
-      {
-      this.theSlot = slot;
-      GL11.glDisable(GL11.GL_LIGHTING);
-      GL11.glDisable(GL11.GL_DEPTH_TEST);
-      int k1 = slot.xDisplayPosition;
-      i1 = slot.yDisplayPosition;
-      this.drawGradientRect(k1, i1, k1 + 16, i1 + 16, -2130706433, -2130706433);
-      GL11.glEnable(GL11.GL_LIGHTING);
-      GL11.glEnable(GL11.GL_DEPTH_TEST);
-      }
+   
     }
 
   this.drawGuiContainerForegroundLayer(par1, par2);
@@ -449,6 +442,7 @@ protected void drawSlotInventory(Slot par1Slot)
 
   itemRenderer.zLevel = 0.0F;
   this.zLevel = 0.0F;
+  
   }
 
 private void func_94066_g()
@@ -653,6 +647,8 @@ protected void func_85041_a(int par1, int par2, int par3, long par4)
  */
  protected void mouseMovedOrUp(int par1, int par2, int par3)
    {
+   mouseX = par1;
+   mouseY = par2;
    Slot slot = this.getSlotAtPosition(par1, par2);
    int l = this.guiLeft;
    int i1 = this.guiTop;

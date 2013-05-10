@@ -20,11 +20,18 @@
  */
 package shadowmage.ancient_warfare.client.gui.elements;
 
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.Icon;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiInventorySlot extends GuiElement
 {
-
+protected static RenderItem itemRenderer = new RenderItem();
 Slot slot;
 /**
  * @param elementNum
@@ -40,8 +47,52 @@ public GuiInventorySlot(int elementNum, IGuiElementCallback parent, Slot slot)
 
 @Override
 public void drawElement(int mouseX, int mouseY)
-  {
-  
+  {  
+  int i = guiLeft + renderPosX;
+  int j = guiTop + renderPosY;
+  ItemStack itemstack = slot.getStack();
+  boolean flag = false;
+  boolean flag1 = false;
+  String s = null;
+
+  this.zLevel = 100.0F;
+  itemRenderer.zLevel = 100.0F;
+
+  if (itemstack == null)
+    {
+    Icon icon = slot.getBackgroundIconIndex();
+    if (icon != null)
+      {
+      GL11.glDisable(GL11.GL_LIGHTING);
+      this.mc.renderEngine.bindTexture("/gui/items.png");
+      this.drawTexturedModelRectFromIcon(i, j, icon, 16, 16);
+      GL11.glEnable(GL11.GL_LIGHTING);
+      flag1 = true;
+      }
+    }
+  if (!flag1)
+    {
+    if (flag)
+      {
+      drawRect(i, j, i + 16, j + 16, -2130706433);
+      }
+    GL11.glEnable(GL11.GL_DEPTH_TEST);
+    itemRenderer.renderItemAndEffectIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, itemstack, i, j);
+    itemRenderer.renderItemOverlayIntoGUI(this.mc.fontRenderer, this.mc.renderEngine, itemstack, i, j, s);
+    }
+  itemRenderer.zLevel = 0.0F;
+  this.zLevel = 0.0F; 
+  if (this.isMouseOver(mouseX, mouseY))
+    {
+    int i1;
+    GL11.glDisable(GL11.GL_LIGHTING);
+    GL11.glDisable(GL11.GL_DEPTH_TEST);
+    int k1 = this.guiLeft + this.renderPosX;
+    i1 = this.guiTop + this.renderPosY;
+    this.drawGradientRect(k1, i1, k1 + 16, i1 + 16, -2130706433, -2130706433);
+    GL11.glEnable(GL11.GL_LIGHTING);
+    GL11.glEnable(GL11.GL_DEPTH_TEST);
+    }
   }
 
 @Override
