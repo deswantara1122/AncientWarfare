@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.inventory.Slot;
 
 import org.lwjgl.opengl.GL11;
 
@@ -66,6 +67,12 @@ public void updateTotalHeight(int height)
 public void addGuiElement(GuiElement el)
   {
   this.elements.add(el);
+  }
+
+@Override
+public void onSlotClicked(Slot slot, int mouseButton, int shiftStatus)
+  {
+  this.parentGui.onSlotClicked(slot, mouseButton, shiftStatus);
   }
 
 @Override

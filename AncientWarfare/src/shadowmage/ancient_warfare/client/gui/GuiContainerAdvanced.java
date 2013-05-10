@@ -98,6 +98,12 @@ public boolean isMouseOverControl(int mouseX, int mouseY)
   }
 
 @Override
+public void onSlotClicked(Slot slot, int mouseButton, int shiftStatus)
+  {
+  
+  }
+
+@Override
 public void onElementReleased(IGuiElement element)
   {  
   }
@@ -638,8 +644,7 @@ public void handleMouseInput()
     else
       {
       el.onMouseMoved(mouseX, mouseY, buttonNum);
-      }
-    
+      }    
     } 
   super.handleMouseInput();
   }

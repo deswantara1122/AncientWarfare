@@ -20,6 +20,8 @@
  */
 package shadowmage.ancient_warfare.client.gui.elements;
 
+import net.minecraft.inventory.Slot;
+
 public interface IGuiElementCallback
 {
 
@@ -28,5 +30,5 @@ public void onElementReleased(IGuiElement element);
 public void onElementDragged(IGuiElement element);
 public void onElementMouseWheel(IGuiElement element, int amt);
 public void onElementKeyTyped(char ch, int keyNum);
-
+public void onSlotClicked(Slot slot, int mouseButton, int shiftStatus);
 }
